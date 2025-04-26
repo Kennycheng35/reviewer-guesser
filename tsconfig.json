@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "checkJs": false,
+      "target": "es2020",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./dist",
+      "rootDir": "./api",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true
+    },
+    "include": ["api/**/*"],   
+    "exclude": ["node_modules", "api/db", "jobs", "dist"]
+}

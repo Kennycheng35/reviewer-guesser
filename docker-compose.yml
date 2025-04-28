@@ -16,9 +16,31 @@ services:
     container_name: movie-of-day
     ports:
       - "6379:6379"
+    command: [
+      "redis-server",
+      "--requirepass", "${REDIS_MOVIE_PASSWORD}",
+      "--bind", "0.0.0.0",
+      "--protected-mode", "yes"
+    ]
+    networks:
+      - redis-net
+    restart: always
+
   redis-bullmq:
     image: redis:latest
     container_name: redis-bullmq
     ports:
       - "6380:6379"
+    command: [
+      "redis-server",
+      "--requirepass", "${REDIS_BULLMQ_PASSWORD}",
+      "--bind", "0.0.0.0",
+      "--protected-mode", "yes"
+    ]
+    networks:
+      - redis-net
+    restart: always
     
+  networks:
+    redis-net:
+      driver: bridge

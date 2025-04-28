@@ -3,7 +3,8 @@ import { add_movie_poster } from "../../add_movie_poster.js"
 export default {
     name: 'add_posters_to_movies',
     options: {
-        repeat: { cron: '0 */6 * * *'}
+        repeat: { cron: '0 */6 * * *'},
+        jobId: 'add-movie-posters'
     },
     handler: async (job) => {
         try {

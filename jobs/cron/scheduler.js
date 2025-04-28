@@ -3,6 +3,7 @@ import add_popular_movies_to_db from './jobs/add_popular_movies_to_db.js';
 import add_reviews_for_movies from './jobs/add_reviews_for_movies.js';
 import pick_new_movie_of_day from './jobs/pick_new_movie_of_day.js';
 import add_posters_to_movies from './jobs/add_posters_to_movies.js';
+import { upsertRepeatableJob } from './upsertRepeatableJob.js';
 
 const jobs = [
   add_popular_movies_to_db,
@@ -14,6 +15,7 @@ const jobs = [
 (async () => {
     for (const job of jobs) {
       await jobQueue.add(job.name, {}, job.options);
+      await upsertRepeatableJob(jobQueue, job)
       console.log(`Scheduled ${job.name}`);
     }
 })();

@@ -6,7 +6,7 @@ dotenv.config();
 
 const job_queue = new Redis({
     port: 6380,
-    host: '127.0.0.1',
+    host: 'redis-bullmq',
     password: process.env.REDIS_BULLMQ_PASSWORD,
     maxRetriesPerRequest: null, 
 });

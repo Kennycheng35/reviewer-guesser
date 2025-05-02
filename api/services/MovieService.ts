@@ -26,10 +26,8 @@ type MovieSuggestions = {
 
 export default class MovieService {
     getMovieOfTheDay = async (date: string): Promise<Movie | {}> => {
-        console.log('date in service',date);
         // const formattedDate = date.toISOString().split('T')[0]; // "2025-04-25"
         const movie = await redis.get(date);
-        console.log('movie returned', movie);
         if (movie) {
             const parsedMovie = JSON.parse(movie);
             const {

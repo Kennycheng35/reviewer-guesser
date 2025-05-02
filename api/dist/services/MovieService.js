@@ -39,6 +39,3 @@ class MovieService {
     }
 }
 exports.default = MovieService;
-// const movieService = new MovieService();
-// movieService.getAllMovieSuggestions().then(el => console.log(el));
-// movieService.getMovieOfTheDay();

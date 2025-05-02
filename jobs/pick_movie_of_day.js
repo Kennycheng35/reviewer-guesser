@@ -1,5 +1,5 @@
 import { getRandomReview } from "./functions/getRandomReview.js";
-import redis from '../api/db/redis.js';
+import redis from './db/redis.js';
 import { DateTime } from "luxon";
 
 export const pick_movie_of_day = async () => {

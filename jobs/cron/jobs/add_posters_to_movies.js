@@ -11,7 +11,9 @@ export default {
             console.log(`${job.name} starting`);
             await add_movie_poster();  
             await add_movie_poster();    
+            await add_movie_poster();
             await add_movie_poster();        
+        
         }
         catch (e) {
             console.log(e)

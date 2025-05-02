@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.History = void 0;
 const sequelize_1 = require("sequelize");
-const db_js_1 = __importDefault(require("../db/db.js")); // Path to your sequelize instance
+const db_js_1 = __importDefault(require("../db/db.js"));
 exports.History = db_js_1.default.define('History', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,

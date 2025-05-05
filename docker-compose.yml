@@ -134,7 +134,7 @@ services:
       - REDIS_BULLMQ_PORT=6380
       - REDIS_BULLMQ_PASSWORD=${REDIS_BULLMQ_PASSWORD}
   frontend:
-    image: kennycheng35/review-guesser:latest
+    image: kennycheng35/review-guesser:v1.0.0
     container_name: review-guesser-frontend
     restart: unless-stopped
     networks:

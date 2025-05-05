@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import MovieService from "../services/MovieService";
+import MovieService from "../services/MovieService.js";
 
 class MovieController {
 

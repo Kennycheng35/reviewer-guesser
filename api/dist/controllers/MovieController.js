@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const MovieService_1 = __importDefault(require("../services/MovieService"));
+import MovieService from "../services/MovieService.js";
 class MovieController {
     constructor() {
         this.getMovieOfTheDay = async (req, res) => {
@@ -17,7 +12,7 @@ class MovieController {
             const movies = await this.movieService.getAllMovieSuggestions();
             return res.send(movies);
         };
-        this.movieService = new MovieService_1.default();
+        this.movieService = new MovieService();
     }
 }
-exports.default = MovieController;
+export default MovieController;

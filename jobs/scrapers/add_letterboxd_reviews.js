@@ -6,8 +6,18 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const add_letterboxd_reviews = async (url, film, name, difficulty) => {
+    let browser;
     try {
-        const browser = await puppeteer.launch({ headless: true });
+        browser = await puppeteer.launch({ 
+            executablePath: '/usr/bin/chromium',
+            headless: 'new',
+            args: [
+              '--no-sandbox', 
+              '--disable-setuid-sandbox', 
+              '--disable-dev-shm-usage', 
+              '--disable-gpu'
+            ],
+        });
         const page = await browser.newPage();
         await page.goto(url, { waitUntil: 'networkidle2', timeout: 60000 });
         const hasElement = await page.$('a[data-js-trigger="spoiler.reveal"]');
@@ -69,5 +79,9 @@ export const add_letterboxd_reviews = async (url, film, name, difficulty) => {
     catch (e) {
         console.log(e);
         await browser.close();
+    }
+    finally {
+        await browser.close();
+        await fs.rm(userDataDir, { recursive: true, force: true });
     }
 }

@@ -1,20 +1,18 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const fastify_1 = __importDefault(require("fastify"));
-const cors_1 = __importDefault(require("@fastify/cors"));
-const movieRoute_1 = require("./routes/movieRoute");
-const fastify = (0, fastify_1.default)({ logger: true });
-fastify.register(movieRoute_1.movieRoute, { prefix: '/api' });
+import Fastify from 'fastify';
+import cors from '@fastify/cors';
+import { movieRoute } from './routes/movieRoute.js';
+import dotenv from 'dotenv';
+dotenv.config();
+const fastify = Fastify({ logger: true });
+fastify.register(movieRoute, { prefix: '/api' });
+const port = parseInt(process.env.BACKEND_PORT || '3000', 10);
 const start = async () => {
     try {
-        await fastify.register(cors_1.default, {
+        await fastify.register(cors, {
             origin: '*',
             credentials: true
         });
-        await fastify.listen({ port: 3000 });
+        await fastify.listen({ port, host: '0.0.0.0' });
     }
     catch (e) {
         fastify.log.error(e);

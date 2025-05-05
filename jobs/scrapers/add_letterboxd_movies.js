@@ -9,11 +9,13 @@ export const add_letterboxd_movies = async (url) => {
   let browser;
   try {
     browser = await puppeteer.launch({ 
+      executablePath: '/usr/bin/chromium',
       headless: 'new',
       args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
+        '--no-sandbox', 
+        '--disable-setuid-sandbox', 
+        '--disable-dev-shm-usage', 
+        '--disable-gpu'
       ],
     });
     const page = await browser.newPage();
@@ -49,6 +51,7 @@ export const add_letterboxd_movies = async (url) => {
   finally {
     if (browser) {
       await browser.close();
+      await fs.rm(userDataDir, { recursive: true, force: true });
     }
   }
 };

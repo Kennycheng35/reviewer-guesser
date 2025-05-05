@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import MovieController from '../controllers/MovieController';
+import MovieController from '../controllers/MovieController.js';
 
 export const movieRoute = async (fastify: FastifyInstance) => {
     const movieController = new MovieController();

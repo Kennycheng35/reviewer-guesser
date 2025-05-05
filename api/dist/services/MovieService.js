@@ -1,17 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const redis_js_1 = __importDefault(require("../db/redis.js"));
-const Movie_js_1 = require("../models/Movie.js");
-class MovieService {
+import redis from "../db/redis.js";
+import { Movie } from "../models/Movie.js";
+export default class MovieService {
     constructor() {
         this.getMovieOfTheDay = async (date) => {
-            console.log('date in service', date);
             // const formattedDate = date.toISOString().split('T')[0]; // "2025-04-25"
-            const movie = await redis_js_1.default.get(date);
-            console.log('movie returned', movie);
+            const movie = await redis.get(date);
             if (movie) {
                 const parsedMovie = JSON.parse(movie);
                 const { title, id, link, poster } = parsedMovie;
@@ -27,7 +20,7 @@ class MovieService {
             return {};
         };
         this.getAllMovieSuggestions = async () => {
-            const movies = await Movie_js_1.Movie.findAll();
+            const movies = await Movie.findAll();
             const movieSuggestions = movies.map((el) => {
                 return {
                     title: el.dataValues.title,
@@ -38,4 +31,3 @@ class MovieService {
         };
     }
 }
-exports.default = MovieService;

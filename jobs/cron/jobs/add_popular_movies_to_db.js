@@ -8,6 +8,7 @@ export default {
     name: 'add_popular_movies_to_db',
     options: {
         repeat: { cron: '0 0,12 * * *'},
+        // repeat: { cron: '*/2 * * * *'},
         jobId: 'add-popular-movies'
 
         // repeat: { cron: '0 1 * * 0'}

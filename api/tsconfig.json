@@ -3,8 +3,8 @@
       "allowJs": true,
       "checkJs": false,
       "target": "es2020",
-      "module": "commonjs",
-      "moduleResolution": "node",
+      "module": "NodeNext",             // Tell TSC to output Node.js compatible ESM
+      "moduleResolution": "NodeNext",    // Use modern Node.js module resolution
       "outDir": "./dist",
       "rootDir": ".",
       "strict": true,

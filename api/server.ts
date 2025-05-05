@@ -1,7 +1,7 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 
-import { movieRoute } from './routes/movieRoute';
+import { movieRoute } from './routes/movieRoute.js';
 
 import dotenv from 'dotenv';
 

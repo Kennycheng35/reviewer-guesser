@@ -52,8 +52,7 @@ services:
       - app-net
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "redis-cli", "-a", "${REDIS_BULLMQ_PASSWORD}", "ping"]
-      interval: 10s
+      test: ["CMD", "redis-cli", "-p", "6380", "-a", "${REDIS_BULLMQ_PASSWORD}", "ping"] 
       timeout: 5s
       retries: 5
   

@@ -20,51 +20,53 @@ export const getRandomReview = async () => {
             having: Sequelize.where(fn('COUNT', col('reviews.id')), '>=', 4),
             raw: true,
         });
-        const randomIndex = Math.floor(Math.random() * movies.length);
-        const randomMovieId = movies[randomIndex].id;
+        if (movies) {
+            const randomIndex = Math.floor(Math.random() * movies.length);
+            const randomMovieId = movies[randomIndex].id;
 
-        const randomMovie = await Movie.findOne({
-            where: { id: randomMovieId },
-            attributes: ['id', 'title', 'link', 'poster'],
-            include: [
-                {
-                model: Review,
-                as: 'reviews',
-                where: { shown: false },
-                required: true,
-                attributes: ['id', 'review', 'rating', 'innerhtml', 'liked', 'difficulty'],
-                order: Sequelize.literal('RANDOM()'), // Use 'RAND()' for MySQL
-                limit: 4,
-                },
-            ],
-        });
+            const randomMovie = await Movie.findOne({
+                where: { id: randomMovieId },
+                attributes: ['id', 'title', 'link', 'poster'],
+                include: [
+                    {
+                    model: Review,
+                    as: 'reviews',
+                    where: { shown: false },
+                    required: true,
+                    attributes: ['id', 'review', 'rating', 'innerhtml', 'liked', 'difficulty'],
+                    order: Sequelize.literal('RANDOM()'), // Use 'RAND()' for MySQL
+                    limit: 4,
+                    },
+                ],
+            });
 
-    
-        const movieId = randomMovie.id;        
-        const { title, link, reviews, poster} = randomMovie;
+        
+            const movieId = randomMovie.id;        
+            const { title, link, reviews, poster} = randomMovie;
 
-        const history = await History.create({
-            movie_id: movieId,
-            title,
-            link,
-        });
-    
-        const reviewsToUpdate = randomMovie.reviews.map(el => el.dataValues.id);
+            const history = await History.create({
+                movie_id: movieId,
+                title,
+                link,
+            });
+        
+            const reviewsToUpdate = randomMovie.reviews.map(el => el.dataValues.id);
 
-        const updateShownFlag = await Review.update(
-           {shown: true, play_date: Sequelize.literal('CURRENT_DATE')},
-           {
-            where: {
-                id: reviewsToUpdate
+            const updateShownFlag = await Review.update(
+            {shown: true, play_date: Sequelize.literal('CURRENT_DATE')},
+            {
+                where: {
+                    id: reviewsToUpdate
+                }
             }
-           }
-        );
-        return {
-            id: movieId,
-            title,
-            link,
-            poster,
-            reviews: JSON.stringify(reviews)
+            );
+            return {
+                id: movieId,
+                title,
+                link,
+                poster,
+                reviews: JSON.stringify(reviews)
+            }
         }
     }
     catch (e) {

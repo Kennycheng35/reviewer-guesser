@@ -5,11 +5,13 @@ FROM node:18-bookworm-slim
 ENV NODE_ENV=production
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 ENV TINI_VERSION v0.19.0
+ENV XDG_CONFIG_HOME=/tmp/.chromium_config \
+    XDG_CACHE_HOME=/tmp/.chromium_cache
 
-# Create non-root user and group first (running as root needed for apt-get)
-# Using -S for system user/group as in your Alpine stage example
-# Using -r (system user) is also common/fine on Debian.
 RUN groupadd -r appgroup && adduser --system --ingroup appgroup appuser
+
+RUN mkdir -p /tmp/.chromium_config /tmp/.chromium_cache && \
+    chown -R appuser:appgroup /tmp/.chromium_config /tmp/.chromium_cache 
 # Install dependencies as root
 USER root
 
@@ -50,6 +52,9 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     libxrender1 \
     libxss1 \
     libxtst6 \
+    lsb-release \
+    wget \
+    xdg-utils \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Verify Chromium installation (still useful)

@@ -136,6 +136,19 @@ services:
       - REDIS_BULLMQ_HOST=redis-bullmq
       - REDIS_BULLMQ_PORT=6380
       - REDIS_BULLMQ_PASSWORD=${REDIS_BULLMQ_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '1.75' # Allow up to 1.75 vCPUs during its run.
+                        # It can use this much when active; system gets it back when idle.
+          memory: 1300M # Limit to 1.3GB of RAM. This is a slight increase,
+                        # but still leaves ~700MB for OS & Docker.
+                        # Monitor this VERY carefully.
+        reservations:
+          cpus: '0.25' # Lower CPU reservation is fine as it's mostly idle.
+                        # It will get more CPU if available, up to the limit.
+          memory: 768M # Keep a reasonable memory reservation to ensure it can
+                        # start and run its tasks when scheduled.
 
   frontend:
     image: kennycheng35/review-guesser:v1.0.0

@@ -34,7 +34,7 @@ export const getRandomReview = async () => {
                     where: { shown: false },
                     required: true,
                     attributes: ['id', 'review', 'rating', 'innerhtml', 'liked', 'difficulty'],
-                    order: Sequelize.literal('RANDOM()'), // Use 'RAND()' for MySQL
+                    order: [['id', 'DESC']], 
                     limit: 4,
                     },
                 ],

@@ -10,7 +10,7 @@ export const add_letterboxd_movies = async (url) => {
   let browser;
   try {
     browser = await puppeteer.launch({ 
-      protocolTimeout: 600000,
+      protocolTimeout: 300000,
       executablePath: '/usr/bin/chromium',
       headless: 'new',
       args: [
@@ -22,7 +22,7 @@ export const add_letterboxd_movies = async (url) => {
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 400000 });
-    await page.waitForSelector('ul', { timeout: 60000 });
+    await page.waitForSelector('ul', { timeout: 30000 });
 
     await autoScroll(page);
 

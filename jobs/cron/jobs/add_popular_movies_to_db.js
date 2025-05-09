@@ -7,8 +7,8 @@ dotenv.config();
 export default {
     name: 'add_popular_movies_to_db',
     options: {
-        // repeat: { cron: '0 0,12 * * *'},
-        repeat: { cron: '*/5 * * * *'},
+        repeat: { cron: '0 0,12 * * *'},
+        // repeat: { cron: '*/5 * * * *'},
         jobId: 'add-popular-movies'
 
         // repeat: { cron: '0 1 * * 0'}

@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer';
 import { ProtocolError } from 'puppeteer-core/lib/cjs/puppeteer/common/Errors.js';
+import fs from 'fs/promises'; // <-- IMPORT fs/promises
 
 import dotenv from 'dotenv';
 
@@ -9,6 +10,7 @@ export const add_letterboxd_movies = async (url) => {
   let browser;
   try {
     browser = await puppeteer.launch({ 
+      protocolTimeout: 600000,
       executablePath: '/usr/bin/chromium',
       headless: 'new',
       args: [
@@ -19,7 +21,7 @@ export const add_letterboxd_movies = async (url) => {
       ],
     });
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 200000 });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 400000 });
     await page.waitForSelector('ul', { timeout: 60000 });
 
     await autoScroll(page);

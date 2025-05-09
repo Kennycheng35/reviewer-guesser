@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import fs from 'fs/promises'; // <-- IMPORT fs/promises
 
 import dotenv from 'dotenv';
 

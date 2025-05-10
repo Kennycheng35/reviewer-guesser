@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs/promises'; // <-- IMPORT fs/promises
-
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();

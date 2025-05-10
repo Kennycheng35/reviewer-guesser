@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const myProfilePath = path.resolve('./browser-profile');
+
+
 export const add_letterboxd_reviews = async (url, film, name, difficulty) => {
     let browser;
     try {
@@ -83,6 +86,6 @@ export const add_letterboxd_reviews = async (url, film, name, difficulty) => {
     }
     finally {
         await browser.close();
-        await fs.rm(userDataDir, { recursive: true, force: true });
+        await fs.rm(myProfilePath , { recursive: true, force: true });
     }
 }

@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const myProfilePath = path.resolve('./browser-profile');
+
 export const get_poster_url = async (url) => {
     let browser;
     try {
@@ -35,6 +37,6 @@ export const get_poster_url = async (url) => {
     }
     finally {
         await browser.close();
-        await fs.rm(userDataDir, { recursive: true, force: true });
+        await fs.rm(myProfilePath , { recursive: true, force: true });
     }
 }

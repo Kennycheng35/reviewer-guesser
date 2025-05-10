@@ -1,16 +1,19 @@
 import puppeteer from 'puppeteer';
 import { ProtocolError } from 'puppeteer-core/lib/cjs/puppeteer/common/Errors.js';
 import fs from 'fs/promises'; // <-- IMPORT fs/promises
-
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+const myProfilePath = path.resolve('./browser-profile');
 
 export const add_letterboxd_movies = async (url) => {
   let browser;
   try {
     browser = await puppeteer.launch({ 
       protocolTimeout: 300000,
+      //remove for local
       executablePath: '/usr/bin/chromium',
       headless: 'new',
       args: [
@@ -22,7 +25,7 @@ export const add_letterboxd_movies = async (url) => {
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 400000 });
-    await page.waitForSelector('ul', { timeout: 30000 });
+    await page.waitForSelector('ul', { timeout: 100000 });
 
     await autoScroll(page);
 
@@ -34,7 +37,7 @@ export const add_letterboxd_movies = async (url) => {
                 const title = item.querySelector('a')?.textContent.trim();
                 const link = item.querySelector('div[data-film-link]')?.getAttribute('data-film-link');
                 return {title, link};
-            }); 
+            }).filter(item => { return item.link !== ''}); 
             
         });
     });
@@ -53,7 +56,7 @@ export const add_letterboxd_movies = async (url) => {
   finally {
     if (browser) {
       await browser.close();
-      await fs.rm(userDataDir, { recursive: true, force: true });
+      await fs.rm(myProfilePath, { recursive: true, force: true });
     }
   }
 };

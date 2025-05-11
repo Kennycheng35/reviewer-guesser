@@ -2,6 +2,11 @@
 // Or run it daily if you want this cycle to repeat every 10 hours of a day.
 // import { movieScrapingQueue } from './your-queue-setup'; // EXAMPLE: how you get your queue
 import jobQueue  from '../queue.js';
+
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const MAX_PAGES_TO_SCHEDULE = 10;
 
 export default {

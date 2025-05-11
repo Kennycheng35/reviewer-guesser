@@ -1,5 +1,5 @@
 // Assume add_letterboxd_movies and addMovie are available
-import { add_letterboxd_movies } from './scrapers/add_letterboxd_movies.js';
+import { add_letterboxd_movies } from '../../scrapers/add_letterboxd_movies.js';
 import { addMovie } from '../../functions/addMovie.js';
 
 export default {

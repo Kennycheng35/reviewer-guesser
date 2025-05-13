@@ -14,7 +14,7 @@ export default {
     options: {
         // Run once a day at midnight to schedule for the next 10 hours
         // Or adjust to run more/less frequently, or trigger manually
-        repeat: { cron: '0 1 * * *' },
+        repeat: { cron: '0 2 * * *' },
         jobId: 'scheduler-for-popular-movies'
     },
     handler: async (job) => { // Assuming queue instance is passed or available

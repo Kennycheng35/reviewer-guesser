@@ -4,7 +4,7 @@ import {History} from '../models/index.js';
 
 import { Sequelize, fn, col } from 'sequelize';
 
-export const getRandomReview = async () => {
+export const getRandomReview = async (date) => {
     try {
         const movies = await Movie.findAll({
             attributes: ['id'],
@@ -48,6 +48,7 @@ export const getRandomReview = async () => {
                 movie_id: movieId,
                 title,
                 link,
+                play_date: date
             });
         
             const reviewsToUpdate = randomMovie.reviews.map(el => el.dataValues.id);

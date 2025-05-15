@@ -14,6 +14,5 @@ export const pick_movie_of_day = async (date =  DateTime.local().toISODate()) =>
         console.log(e);
     }
     finally {
-        redis.disconnect(); 
     }
 }

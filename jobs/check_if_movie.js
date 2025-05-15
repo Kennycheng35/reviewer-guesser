@@ -38,6 +38,5 @@ export const check_if_movie = async () => {
         console.log('There was an error picking movies');
     }
     finally {
-        redis.disconnect();
     }
 }

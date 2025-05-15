@@ -9,10 +9,10 @@ export const pick_movie_of_day = async (date =  DateTime.local().toISODate()) =>
         console.log(`Movie of date: ${date} is...`);
         console.log(review.link);
         await redis.set(date, JSON.stringify(review), 'EX', 259200);
+
+        redis.disconnect(); 
     }
     catch (e) {
         console.log(e);
-    }
-    finally {
     }
 }

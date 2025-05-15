@@ -37,6 +37,4 @@ export const check_if_movie = async () => {
     catch (e) {
         console.log('There was an error picking movies');
     }
-    finally {
-    }
 }
